@@ -4,384 +4,457 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>IA Estratégica en Vaca Muerta | Soluciones Salesforce</title>
+    <title>Field Service en acción con Agentforce | IA para Oil & Gas</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            --primary-it: #024b86; /* Azul oscuro O&G */
-            --secondary-it: #6c757d;
-            --accent-it: #ffaa00; /* Dorado/Naranja (Energía/Visibilidad) */
-            --salesforce-blue: #009ad9; /* Azul de Salesforce para acento en botones */
+            --ink: #0a1628;          /* azul casi negro */
+            --ink-2: #0f2038;        /* azul profundo */
+            --steel: #1b3a5c;        /* azul acero */
+            --sky: #2ec5ff;          /* cyan eléctrico (acento) */
+            --sky-deep: #009ad9;     /* azul salesforce */
+            --amber: #ffb020;        /* energía */
+            --paper: #f4f7fb;        /* fondo claro */
+            --line: rgba(46, 197, 255, 0.18);
         }
+
+        * { scroll-behavior: smooth; }
+
         body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #f8f9fa;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--paper);
+            color: #1b2733;
+            overflow-x: hidden;
         }
-        .bg-primary-it {
-            background-color: var(--primary-it) !important;
+
+        h1, h2, h3, h4, .display-font {
+            font-family: 'Sora', sans-serif;
+            letter-spacing: -0.02em;
         }
-        .text-primary-it {
-            color: var(--primary-it) !important;
+
+        /* ---------- NAV ---------- */
+        .nav-bar {
+            background: rgba(10, 22, 40, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--line);
         }
-        .btn-it {
-            background-color: var(--salesforce-blue);
-            border-color: var(--salesforce-blue);
-            color: white;
-            transition: all 0.3s;
+        .brand-dot {
+            width: 10px; height: 10px; border-radius: 50%;
+            background: var(--sky);
+            box-shadow: 0 0 12px var(--sky);
+            display: inline-block;
         }
-        .btn-it:hover {
-            background-color: #007bb6; 
-            border-color: #007bb6;
-            color: white;
+        .btn-sky {
+            background: var(--sky);
+            border: none;
+            color: var(--ink);
+            font-weight: 600;
+            transition: all .25s ease;
+        }
+        .btn-sky:hover {
+            background: #5ad4ff;
+            color: var(--ink);
             transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(46,197,255,.35);
+        }
+
+        /* ---------- HERO ---------- */
+        .hero {
+            position: relative;
+            background:
+                radial-gradient(900px 500px at 80% -10%, rgba(46,197,255,0.20), transparent 60%),
+                radial-gradient(700px 500px at 0% 110%, rgba(0,154,217,0.18), transparent 55%),
+                linear-gradient(160deg, var(--ink) 0%, var(--ink-2) 55%, var(--steel) 130%);
+            color: #fff;
+            overflow: hidden;
+        }
+        .grid-overlay {
+            position: absolute; inset: 0;
+            background-image:
+                linear-gradient(var(--line) 1px, transparent 1px),
+                linear-gradient(90deg, var(--line) 1px, transparent 1px);
+            background-size: 54px 54px;
+            mask-image: radial-gradient(circle at 70% 30%, #000 0%, transparent 75%);
+            opacity: .6;
+            pointer-events: none;
+        }
+        .eyebrow {
+            font-family: 'Sora', sans-serif;
+            font-weight: 600;
+            font-size: .78rem;
+            letter-spacing: .22em;
+            text-transform: uppercase;
+            color: var(--sky);
+            display: inline-flex; align-items: center; gap: 10px;
+        }
+        .eyebrow::before {
+            content: ""; width: 34px; height: 1px; background: var(--sky); display: inline-block;
+        }
+        .hero h1 {
+            font-weight: 800;
+            font-size: clamp(2.3rem, 5vw, 3.8rem);
+            line-height: 1.04;
+        }
+        .hero .lead-sub {
+            font-family: 'Sora', sans-serif;
+            font-weight: 300;
+            font-size: clamp(1.1rem, 2.2vw, 1.5rem);
+            color: #bcd4ec;
+        }
+        .hero p.body { color: #9fb6cf; max-width: 560px; }
+        .chip {
+            border: 1px solid var(--line);
+            color: #bfe8fb;
+            border-radius: 999px;
+            padding: 6px 14px;
+            font-size: .8rem;
+            font-weight: 500;
+            background: rgba(46,197,255,0.06);
+        }
+
+        /* ---------- FORM CARD ---------- */
+        .form-card {
+            background: #ffffff;
+            border-radius: 18px;
+            box-shadow: 0 30px 70px rgba(2, 18, 40, .45);
+            border: 1px solid rgba(255,255,255,.6);
+        }
+        .form-card .tag {
+            font-size: .72rem; letter-spacing:.16em; text-transform:uppercase;
+            color: var(--sky-deep); font-weight: 600;
+        }
+        .form-control {
+            border-radius: 10px;
+            border: 1px solid #d9e2ec;
+            padding: .65rem .85rem;
         }
         .form-control:focus {
-            border-color: var(--primary-it);
-            box-shadow: 0 0 0 0.25rem rgba(2, 75, 134, 0.25);
+            border-color: var(--sky-deep);
+            box-shadow: 0 0 0 .2rem rgba(0,154,217,.18);
         }
-        .it-card-shadow {
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        .btn-submit {
+            background: linear-gradient(100deg, var(--sky-deep), var(--sky));
+            border: none; color: #fff; font-weight: 700; letter-spacing: .02em;
+            padding: .8rem; border-radius: 10px; transition: all .25s ease;
         }
-        .hero-section {
-            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.8)), url('img/colton-sturgeon-f7ADPPOG_EQ-unsplash.jpg'); 
-            background-size: cover;
-            background-position: center;
-            padding: 80px 0;
-            color: white;
-            position: relative;
+        .btn-submit:hover { filter: brightness(1.08); transform: translateY(-1px); box-shadow: 0 10px 28px rgba(0,154,217,.4); color:#fff;}
+
+        /* ---------- COUNTDOWN STRIP ---------- */
+        .strip {
+            background: var(--ink);
+            color: #fff;
+            border-top: 1px solid var(--line);
+            border-bottom: 1px solid var(--line);
         }
-        .countdown-box {
-            background-color: white;
-            color: #343a40;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            font-weight: 600;
+        .cd-num {
+            font-family: 'Sora', sans-serif;
+            font-weight: 700;
+            font-size: clamp(1.8rem, 4vw, 2.6rem);
+            color: #fff;
+            line-height: 1;
         }
-        .logo-nav {
-            max-height: 35px; 
-            margin-right: 15px;
-            opacity: 1;
-            transition: opacity 0.3s;
+        .cd-label { font-size:.72rem; letter-spacing:.16em; text-transform:uppercase; color: var(--sky); }
+        .cd-sep { color: var(--line); font-size: 1.8rem; }
+
+        /* ---------- SESSION CONTENT ---------- */
+        .section-label {
+            font-family:'Sora',sans-serif; font-weight:600; font-size:.78rem;
+            letter-spacing:.22em; text-transform:uppercase; color: var(--sky-deep);
         }
-        .logo-nav:hover {
-            opacity: 0.8;
+        .sess-card {
+            background:#fff; border-radius:16px; padding: 2rem;
+            border:1px solid #e6edf5; height:100%;
+            transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease;
+            position: relative; overflow:hidden;
         }
-        .speaker-img {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-bottom: 15px;
-            border: 4px solid var(--primary-it);
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        .sess-card::before{
+            content:""; position:absolute; left:0; top:0; height:4px; width:100%;
+            background: linear-gradient(90deg, var(--sky-deep), var(--sky));
+            transform: scaleX(0); transform-origin:left; transition: transform .35s ease;
         }
-        .navbar-light-custom {
-            background-color: white !important;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        .sess-card:hover{ transform: translateY(-6px); box-shadow:0 22px 50px rgba(10,22,40,.12); border-color: transparent;}
+        .sess-card:hover::before{ transform: scaleX(1); }
+        .sess-num {
+            font-family:'Sora',sans-serif; font-weight:800; font-size:.9rem; color: var(--sky-deep);
+            letter-spacing:.1em;
         }
-        .accordion-button:not(.collapsed) {
-            color: var(--primary-it);
-            background-color: #e7f1ff;
-            box-shadow: inset 0 -1px 0 rgba(0,0,0,.125);
+        .sess-icon {
+            width:54px; height:54px; border-radius:14px;
+            display:flex; align-items:center; justify-content:center;
+            background: linear-gradient(150deg, rgba(0,154,217,.12), rgba(46,197,255,.12));
+            color: var(--sky-deep); font-size:1.5rem; margin: 14px 0 18px;
         }
-        .accordion-button:focus {
-            border-color: var(--primary-it);
-            box-shadow: 0 0 0 0.25rem rgba(2, 75, 134, 0.25);
+        .sess-card h4 { font-weight:700; font-size:1.18rem; margin-bottom:.6rem; color: var(--ink); }
+        .sess-card .q { color: var(--sky-deep); font-weight:600; font-size:.92rem; margin-bottom:.7rem; }
+        .sess-card p { color:#516170; font-size:.96rem; margin:0; }
+
+        /* ---------- DETAILS ---------- */
+        .meta-card{
+            background: var(--ink-2); color:#fff; border-radius:16px; padding:1.6rem 1.8rem;
+            border:1px solid var(--line); height:100%;
         }
-        .btn-primary-it {
-            background-color: var(--primary-it);
-            border-color: var(--primary-it);
-            color: white;
+        .meta-card i{ color: var(--sky); font-size:1.4rem; }
+        .meta-svg{ width:30px; height:30px; color: var(--sky); }
+        .sess-icon svg{ width:26px; height:26px; }
+        .aud-pill svg{ width:17px; height:17px; color: var(--sky-deep); }
+        .meta-card .lbl{ font-size:.72rem; letter-spacing:.16em; text-transform:uppercase; color: var(--sky); }
+        .meta-card .val{ font-family:'Sora',sans-serif; font-weight:600; font-size:1.15rem; }
+
+        /* ---------- CTA ---------- */
+        .cta-band{
+            background:
+              radial-gradient(600px 300px at 90% 0%, rgba(46,197,255,.22), transparent 60%),
+              linear-gradient(120deg, var(--ink), var(--steel));
+            color:#fff; border-radius: 22px;
+        }
+
+        /* ---------- AUDIENCE PILLS ---------- */
+        .aud-pill{
+            background:#fff; border:1px solid #e6edf5; border-radius:999px;
+            padding:.5rem 1.1rem; font-size:.9rem; color:#33424f; font-weight:500;
+            display:inline-flex; align-items:center; gap:8px;
+        }
+        .aud-pill i{ color: var(--sky-deep); }
+
+        footer{ background: var(--ink); color:#7e93a8; }
+
+        @media (prefers-reduced-motion: reduce){
+            *{ transition:none !important; }
         }
     </style>
 </head>
 
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-light-custom sticky-top">
+    <!-- NAV -->
+    <nav class="navbar navbar-expand-lg nav-bar sticky-top py-3">
         <div class="container">
-            <a class="navbar-brand d-flex align-items-center" href="#">
-                <img src="img/logoctech.png" alt="Logo de C-Tech" class="logo-nav">
-                <img src="img/logopartner.png" alt="Logo de Vurpix" class="logo-nav">
-                <span class="text-muted fw-light small ms-2 d-none d-md-block">| Cumbre de Liderazgo Operacional</span>
+            <a class="navbar-brand d-flex align-items-center gap-2 text-white fw-semibold" href="#">
+                <span class="brand-dot"></span>
+                <span class="display-font" style="font-size:1.05rem;">Field Service · IA</span>
             </a>
-            <button type="button" class="btn btn-it fw-bold" onclick="document.getElementById('registro-form').scrollIntoView({ behavior: 'smooth' });">
-                <i class="bi bi-person-check-fill me-1"></i> Solicitar Acceso VIP
+            <button type="button" class="btn btn-sky px-3 py-2" onclick="document.getElementById('registro-form').scrollIntoView();">
+                Reservar mi lugar
             </button>
         </div>
     </nav>
-    
-    <header class="hero-section">
-        <div class="container py-5">
-            <div class="row align-items-center">
-                <div class="col-lg-7 text-center text-lg-start mb-4 mb-lg-0">
-                    <span class="badge rounded-pill text-white mb-3 fs-6 p-2 fw-bold" style="background-color: var(--accent-it);"><i class="bi bi-cpu-fill me-1"></i> CONVENCIÓN DE LIDERAZGO EN NEUQUÉN</span>
-                    <h1 class="display-3 fw-bold mb-3" style="color: white;">
-                        Inteligencia Artificial en Vaca Muerta
-                    </h1>
-                    <h2 class="display-6 fw-light mb-4 text-white">
-                        La IA como agente de confianza: Maximizando el ROI y la Seguridad en la industria.
-                    </h2>
-                    <p class="lead mb-0">Un encuentro exclusivo para Dueños, Socios, Directores de Operaciones, Seguridad e IT que buscan soluciones concretas. Mostraremos cómo la inteligencia artificial se aplica directamente a sus dolores operativos.</p>
-                    <div class="mt-4">
-                        <span class="badge text-bg-secondary me-2">#Productividad31%</span>
-                        <span class="badge text-bg-secondary me-2">#CeroRiesgos</span>
+
+    <!-- HERO -->
+    <header class="hero">
+        <div class="grid-overlay"></div>
+        <div class="container py-5 position-relative">
+            <div class="row align-items-center gy-5">
+                <div class="col-lg-7 pe-lg-5">
+                    <span class="eyebrow mb-4 d-inline-flex">Evento online en vivo · 7 de julio</span>
+                    <h1 class="mb-3">Field Service en acción con Agentforce</h1>
+                    <p class="lead-sub mb-4">Inteligencia artificial aplicada a la industria de Oil&nbsp;&amp;&nbsp;Gas.</p>
+                    <p class="body mb-4">Una recorrida práctica por las capacidades de IA que están redefiniendo el trabajo de los equipos de campo. No es una presentación de slides: es ver la herramienta funcionando sobre los problemas reales del sector.</p>
+                    <div class="d-flex flex-wrap gap-2">
+                        <span class="chip">Voice to Form</span>
+                        <span class="chip">Análisis de notas con IA</span>
+                        <span class="chip">Planificación de capacidad</span>
                     </div>
                 </div>
 
+                <!-- FORM (Web-to-Lead intacto) -->
                 <div class="col-lg-5">
-                    <div class="card p-3 it-card-shadow border-0" id="registro-form">
-                        <div class="card-body">
-                            <h4 class="card-title text-center mb-4 fw-bold text-primary-it">Solicitud de Invitación (Exclusivo Liderazgo)</h4>
-                            <form id="salesforceForm" class="contact-form"
-                            action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00D5w000003XOQ6"
-                                method="POST">
-                                
-                                <input type="hidden" name="oid" value="00D5w000003XOQ6">
-                                <input type="hidden" name="retURL" value="https://cambalachetechnologies.github.io/desayuno/subpaginas/gracias.html"> 
-                                <input type="hidden" name="lead_source" value="Cumbre Liderazgo IA Vaca Muerta"> 
-                                
-                                <div class="row g-2">
-                                    <div class="col-md-6 mb-2">
-                                        <input name="first_name" type="text" class="form-control" placeholder="Nombre" required>
-                                    </div>
-                                    <div class="col-md-6 mb-2">
-                                        <input name="last_name" type="text" class="form-control" placeholder="Apellido" required>
-                                    </div>
-                                    
-                                    <div class="col-12 mb-2">
-                                        <input name="email" type="email" class="form-control" placeholder="Email corporativo" id="email" required>
-                                        </div>
+                    <div class="form-card p-4" id="registro-form">
+                        <p class="tag mb-1">Inscripción</p>
+                        <h4 class="fw-bold mb-1" style="color:var(--ink);">Reservá tu lugar</h4>
+                        <p class="text-muted small mb-4">Te enviamos el link de acceso por correo al confirmar.</p>
+                        <form id="salesforceForm"
+                              action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00D5w000003XOQ6"
+                              method="POST">
 
-                                    <div class="col-md-6 mb-2">
-                                        <input name="company" type="text" class="form-control" placeholder="Empresa/Operadora" required>
-                                    </div>
-                                    
-                                    <div class="col-md-6 mb-2">
-                                        <input name="mobile" type="tel" class="form-control" placeholder="Teléfono Móvil" required
-                                                title="Ingrese su número de teléfono móvil" />
-                                    </div>
+                            <input type="hidden" name="oid" value="00D5w000003XOQ6">
+                            <input type="hidden" name="retURL" value="https://cambalachetechnologies.github.io/desayuno/subpaginas/gracias.html">
+                            <input type="hidden" name="lead_source" value="Evento Field Service IA Oil and Gas">
+
+                            <div class="row g-2">
+                                <div class="col-md-6">
+                                    <input name="first_name" type="text" class="form-control" placeholder="Nombre" required>
                                 </div>
-                                
-                                <div class="d-grid mt-4">
-                                    <button type="submit" name="submit" class="btn btn-it w-100 py-2 fw-bold">
-                                        SOLICITAR INVITACIÓN
-                                    </button>
+                                <div class="col-md-6">
+                                    <input name="last_name" type="text" class="form-control" placeholder="Apellido" required>
                                 </div>
-                                
-                                <small class="text-muted d-block text-center mt-3 small">
-                                    Evento exclusivo para C-Level y Directores. Lo contactaremos para validar su solicitud.
-                                </small>
-                            </form>
-                        </div>
+                                <div class="col-12">
+                                    <input name="email" type="email" class="form-control" placeholder="Email corporativo" id="email" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <input name="company" type="text" class="form-control" placeholder="Empresa" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <input name="mobile" type="tel" class="form-control" placeholder="Teléfono móvil" required title="Ingrese su número de teléfono móvil" />
+                                </div>
+                            </div>
+
+                            <div class="d-grid mt-3">
+                                <button type="submit" name="submit" class="btn btn-submit">CONFIRMAR MI LUGAR</button>
+                            </div>
+                            <p class="text-muted text-center small mt-3 mb-0">Cupo con inscripción previa.</p>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
     </header>
 
-    <section class="py-5 bg-white border-bottom">
+    <!-- COUNTDOWN STRIP -->
+    <section class="strip py-4">
+        <div class="container">
+            <div class="row align-items-center text-center text-md-start gy-3">
+                <div class="col-md-4">
+                    <span class="cd-label d-block mb-1">El evento comienza en</span>
+                    <span class="display-font fw-semibold" style="color:#fff;">Martes 7 de julio · 12:00 hs (ARG)</span>
+                </div>
+                <div class="col-md-8">
+                    <div class="d-flex justify-content-center justify-content-md-end align-items-center gap-3" id="countdown">
+                        <div class="text-center"><div class="cd-num" id="days">00</div><div class="cd-label">Días</div></div>
+                        <span class="cd-sep">:</span>
+                        <div class="text-center"><div class="cd-num" id="hours">00</div><div class="cd-label">Hs</div></div>
+                        <span class="cd-sep">:</span>
+                        <div class="text-center"><div class="cd-num" id="minutes">00</div><div class="cd-label">Min</div></div>
+                        <span class="cd-sep">:</span>
+                        <div class="text-center"><div class="cd-num" id="seconds">00</div><div class="cd-label">Seg</div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SESSION CONTENT -->
+    <section class="py-5" id="contenido">
+        <div class="container py-4">
+            <div class="text-center mb-5">
+                <span class="section-label">La sesión</span>
+                <h2 class="fw-bold mt-2" style="font-size:clamp(1.8rem,4vw,2.6rem); color:var(--ink);">Qué vas a ver funcionando</h2>
+                <p class="text-muted mx-auto mt-2" style="max-width:620px;">Tres formas concretas en que la IA de Agentforce Field Service le saca trabajo de encima a los equipos de campo y a quienes los planifican.</p>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <div class="sess-card">
+                        <span class="sess-num">01</span>
+                        <div class="sess-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></div>
+                        <p class="q">¿Tus técnicos pierden tiempo tipeando en vez de trabajar?</p>
+                        <h4>Inspecciones por voz</h4>
+                        <p>Con Voice to Form, el técnico completa una inspección entera hablándole al dispositivo. La IA detecta lo que dice y carga cada campo, sin frenar el trabajo ni sacarse los guantes.</p>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="sess-card">
+                        <span class="sess-num">02</span>
+                        <div class="sess-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><path d="M18.5 2.5a2.12 2.12 0 0 1 3 3L13 14l-4 1 1-4z"/></svg></div>
+                        <p class="q">¿Las notas de campo terminan perdidas o sin cargar?</p>
+                        <h4>Notas manuscritas, leídas por IA</h4>
+                        <p>La IA interpreta las anotaciones tomadas en terreno, las estructura y las deja listas para procesar dentro de Salesforce, sin recargar al equipo.</p>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="sess-card">
+                        <span class="sess-num">03</span>
+                        <div class="sess-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6"/><path d="M19 7h-3M19 7v3"/></svg></div>
+                        <p class="q">¿Planificás la capacidad a fuerza de planilla e intuición?</p>
+                        <h4>Planificación conversacional</h4>
+                        <p>Preguntás en lenguaje natural dónde estás sub-dotado o sobrecargado, reasignás recursos al instante y proyectás la demanda futura contemplando la estacionalidad.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- DETAILS -->
+    <section class="pb-5" id="detalles">
+        <div class="container">
+            <div class="row g-3">
+                <div class="col-md-4">
+                    <div class="meta-card">
+                        <svg class="meta-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+                        <p class="lbl mt-3 mb-1">Fecha</p>
+                        <p class="val mb-0">Martes 7 de julio, 2026</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="meta-card">
+                        <svg class="meta-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+                        <p class="lbl mt-3 mb-1">Horario</p>
+                        <p class="val mb-0">12:00 hs (Argentina)</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="meta-card">
+                        <svg class="meta-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2.5"/><path d="M16.5 7.5a6 6 0 0 1 0 9M7.5 16.5a6 6 0 0 1 0-9M19.5 4.5a10 10 0 0 1 0 15M4.5 19.5a10 10 0 0 1 0-15"/></svg>
+                        <p class="lbl mt-3 mb-1">Modalidad</p>
+                        <p class="val mb-0">Online, en vivo</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AUDIENCE + CTA -->
+    <section class="pb-5">
+        <div class="container">
+            <div class="cta-band p-5 text-center">
+                <span class="section-label" style="color:var(--sky);">Para quién es</span>
+                <h2 class="fw-bold text-white mt-2 mb-4" style="font-size:clamp(1.6rem,3.5vw,2.3rem);">Pensado para quienes mueven la operación en campo</h2>
+                <div class="d-flex flex-wrap justify-content-center gap-2 mb-4" style="max-width:820px; margin:0 auto;">
+                    <span class="aud-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Operaciones</span>
+                    <span class="aud-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Mantenimiento</span>
+                    <span class="aud-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Logística</span>
+                    <span class="aud-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Ingeniería</span>
+                    <span class="aud-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Jefatura de planta</span>
+                    <span class="aud-pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Facility management</span>
+                </div>
+                <p class="text-white-50 mx-auto mb-4" style="max-width:640px;">Más allá del evento, es una buena excusa para volver a charlar y que nos cuentes cómo están encarando la innovación por tu lado.</p>
+                <button type="button" class="btn btn-sky btn-lg px-4" onclick="document.getElementById('registro-form').scrollIntoView();">
+                    Confirmar mi lugar
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-4">
         <div class="container text-center">
-            <h2 class="mb-4 fw-bold">El debate estratégico comienza en:</h2>
-            <div class="row justify-content-center" id="countdown">
-                <div class="col-6 col-md-2 mb-3">
-                    <div class="countdown-box border border-primary-it">
-                        <div class="display-4" id="days">00</div>
-                        <small class="text-muted">Días</small>
-                    </div>
-                </div>
-                <div class="col-6 col-md-2 mb-3">
-                    <div class="countdown-box border border-primary-it">
-                        <div class="display-4" id="hours">00</div>
-                        <small class="text-muted">Horas</small>
-                    </div>
-                </div>
-                <div class="col-6 col-md-2 mb-3">
-                    <div class="countdown-box border border-primary-it">
-                        <div class="display-4" id="minutes">00</div>
-                        <small class="text-muted">Minutos</small>
-                    </div>
-                </div>
-                <div class="col-6 col-md-2 mb-3">
-                    <div class="countdown-box border border-primary-it">
-                        <div class="display-4" id="seconds">00</div>
-                        <small class="text-muted">Segundos</small>
-                    </div>
-                </div>
-            </div>
-            <p class="mt-3 fs-5 text-muted">Miércoles, 17 de Diciembre de 2025 | 10:00 a 13:00</p>
-        </div>
-    </section>
-
-    <section class="container py-5" id="detalles">
-        <div class="row justify-content-center">
-            <div class="col-lg-10">
-                <h2 class="text-center mb-5 fw-bold text-primary-it">Detalles y Logística de la Convención</h2>
-                <div class="row g-4">
-                    <div class="col-md-6">
-                        <div class="card h-100 p-3 border-0 it-card-shadow">
-                            <div class="card-body">
-                                <h5 class="card-title fw-bold text-primary-it"><i class="bi bi-calendar-event me-2"></i> Fecha y Horario</h5>
-                                <p class="card-text">
-                                    <strong class="text-dark">Martes, 17 de Diciembre de 2025</strong><br>
-                                    <span class="text-muted">Desde las 10:00 hasta las 13:00
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-6">
-                        <div class="card h-100 p-3 border-0 it-card-shadow">
-                            <div class="card-body">
-                                <h5 class="card-title fw-bold text-primary-it"><i class="bi bi-geo-alt-fill me-2"></i> Ubicación Estratégica</h5>
-                                <p class="card-text">
-                                    <strong class="text-dark">Polo Tecnológico Neuquén</strong><br>
-                                    Los Ligustros 2222, entre Av. Soldi y Av. Huilén, Ciudad de Neuquén, Neuquén, Argentina.<br>
-                                    <span class="badge bg-success mt-2">Punto de encuentro de la innovación en Vaca Muerta</span>
-                                </p>
-                                <a href="https://maps.app.goo.gl/9JseaTRF512Q9FGA8" target="_blank" class="btn btn-primary-it mt-3">Ver en Maps</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <hr class="my-5 opacity-25">
-    
-    <section class="container py-5" id="temario">
-        <h2 class="text-center mb-5 fw-bold text-primary-it">Agenda: IA Aplicada a los Dolores Operativos de Vaca Muerta</h2>
-        <div class="row justify-content-center">
-            <div class="col-lg-10">
-                <div class="accordion" id="temarioAccordion">
-                    
-                    <div class="accordion-item it-card-shadow mb-3">
-                        <h2 class="accordion-header" id="headingOne">
-                            <button class="accordion-button fw-bold fs-5" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                <i class="bi bi-currency-dollar me-2"></i> ¿Los equipos siguen fallando sin avisar, parando toda la operación?
-                            </button>
-                        </h2>
-                        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#temarioAccordion">
-                            <div class="accordion-body">
-                                La IA detecta fallas antes y envía al técnico justo a tiempo.
-                        </div>                        </div>
-
-                    </div>
-
-                    <div class="accordion-item it-card-shadow mb-3">
-                        <h2 class="accordion-header" id="headingTwo">
-                            <button class="accordion-button collapsed fw-bold fs-5" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                <i class="bi bi-shield-fill-exclamation me-2"></i> ¿Perdemos tiempo y plata moviendo gente y camiones sin necesidad?
-                        </h2>
-                        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#temarioAccordion">
-                            <div class="accordion-body">
-                            La IA organiza rutas y tareas para ahorrar hasta 26% de viajes.                            
-                            </div>
-                        </div>
-                    </div>
-
-                     <div class="accordion-item it-card-shadow mb-3">
-                        <h2 class="accordion-header" id="headingThree">
-                            <button class="accordion-button collapsed fw-bold fs-5" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                <i class="bi bi-code-slash me-2"></i> ¿La seguridad de nuestra gente depende todavía de la suerte y el apuro?
-                            </button>
-                        </h2>
-                        <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#temarioAccordion">
-                            <div class="accordion-body">
-                            El Asistente Digital guía al operario en campo, eliminando el error humano.                           
-                                 </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="container py-5" id="speakers">
-        <h2 class="text-center mb-5 fw-bold text-primary-it">Speakers: Voces líderes en la industria</h2>
-        <div class="row justify-content-center g-4">
-            
-            <div class="col-lg-4 col-md-6">
-                <div class="card h-100 text-center border-0 it-card-shadow p-3">
-                    <div class="card-body">
-                        <img src="img/silviatenazinha.jpeg" alt="Foto de CEO Operadora" class="speaker-img"> 
-                        <h5 class="card-title fw-bold">Silvia Tenazinha</h5>
-                        <p class="card-subtitle mb-2 text-muted small fw-bold">Directora General en Salesforce Argentina</p>
-                        <p class="card-text small">Presentará la visión estratégica global de la IA en el sector energético y la inversión necesaria para escalar el ROI en Vaca Muerta.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6">
-                <div class="card h-100 text-center border-0 it-card-shadow p-3">
-                    <div class="card-body">
-                        <img src="img/martinceriani.jpeg" alt="Foto Martin Ceriani" class="speaker-img">
-                        <h5 class="card-title fw-bold">Martin Ceriani</h5>
-                        <p class="card-subtitle mb-2 text-muted small fw-bold">Co-Founder Cambalache Technologies</p>
-                        <p class="card-text small">Compartirá casos en ejecución e implementación, mostrando las claves para transformar los desafíos operativos de campo en éxito.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6">
-                <div class="card h-100 text-center border-0 it-card-shadow p-3">
-                    <div class="card-body">
-                        <img src="img/martincandas.jpeg" alt="Foto Martin Candas" class="speaker-img">
-                        <h5 class="card-title fw-bold">Martin Candas</h5>
-                        <p class="card-subtitle mb-2 text-muted small fw-bold">Solution Architect en Cambalache Technologies</p>
-                        <p class="card-text small">Demostrará el valor práctico de la IA, explicando cómo conecta sensores y asiste al operario para predecir fallas y garantizar la seguridad.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <hr class="my-5 opacity-25">
-
-    <footer class="bg-dark text-white py-4 mt-5">
-        <div class="container text-center">
-            <p class="mb-0 small">© 2025 Cumbre IA Estratégica Vaca Muerta | Desarrollando soluciones para la industria.</p>
+            <p class="mb-0 small">© 2026 Field Service en acción con Agentforce · Soluciones de IA para la industria de Oil &amp; Gas.</p>
         </div>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // --- Lógica del Conteo Regresivo ---
-        // Fecha del evento: 17 de Diciembre de 2025 a las 10:00:00 AM 
-        const eventDate = new Date("Dec 17, 2025 10:00:00").getTime();
+        // --- Conteo regresivo: 7 de julio de 2026, 12:00 hs Argentina (UTC-3) ---
+        const eventDate = new Date("2026-07-07T12:00:00-03:00").getTime();
 
-        const updateCountdown = setInterval(function() {
-            const now = new Date().getTime();
-            const distance = eventDate - now;
+        const tick = setInterval(function () {
+            const now = Date.now();
+            const d = eventDate - now;
 
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-            // Mostrar el resultado en los elementos con IDs
-            document.getElementById("days").innerHTML = days < 10 ? '0' + days : days;
-            document.getElementById("hours").innerHTML = hours < 10 ? '0' + hours : hours;
-            document.getElementById("minutes").innerHTML = minutes < 10 ? '0' + minutes : minutes;
-            document.getElementById("seconds").innerHTML = seconds < 10 ? '0' + seconds : seconds;
-
-            if (distance < 0) {
-                clearInterval(updateCountdown);
-                document.getElementById("countdown").innerHTML = '<h3 class="text-success">¡El evento ha comenzado!</h3>';
+            if (d < 0) {
+                clearInterval(tick);
+                document.getElementById("countdown").innerHTML = '<span class="display-font fw-semibold" style="color:var(--sky);">¡El evento está en vivo!</span>';
+                return;
             }
+            const days = Math.floor(d / 86400000);
+            const hours = Math.floor((d % 86400000) / 3600000);
+            const minutes = Math.floor((d % 3600000) / 60000);
+            const seconds = Math.floor((d % 60000) / 1000);
+
+            const p = n => n < 10 ? '0' + n : n;
+            document.getElementById("days").textContent = p(days);
+            document.getElementById("hours").textContent = p(hours);
+            document.getElementById("minutes").textContent = p(minutes);
+            document.getElementById("seconds").textContent = p(seconds);
         }, 1000);
 
-        // --- Lógica de Validación (Solo Bootstrap Nativo) ---
-        document.addEventListener('DOMContentLoaded', function() {
+        // --- Validación nativa Bootstrap ---
+        document.addEventListener('DOMContentLoaded', function () {
             const form = document.getElementById('salesforceForm');
-
-            form.addEventListener('submit', function(event) {
+            form.addEventListener('submit', function (event) {
                 if (!form.checkValidity()) {
                     event.preventDefault();
                     event.stopPropagation();
