@@ -11,13 +11,13 @@
 
     <style>
         :root {
-            --ink: #0a1628;          /* azul casi negro */
-            --ink-2: #0f2038;        /* azul profundo */
-            --steel: #1b3a5c;        /* azul acero */
-            --sky: #2ec5ff;          /* cyan eléctrico (acento) */
-            --sky-deep: #009ad9;     /* azul salesforce */
-            --amber: #ffb020;        /* energía */
-            --paper: #f4f7fb;        /* fondo claro */
+            --ink: #0a1628;
+            --ink-2: #0f2038;
+            --steel: #1b3a5c;
+            --sky: #2ec5ff;
+            --sky-deep: #009ad9;
+            --amber: #ffb020;
+            --paper: #f4f7fb;
             --line: rgba(46, 197, 255, 0.18);
         }
 
@@ -60,6 +60,26 @@
             transform: translateY(-2px);
             box-shadow: 0 8px 24px rgba(46,197,255,.35);
         }
+        /* logo separator */
+        .nav-logos {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .nav-logos .nav-sep {
+            width: 1px;
+            height: 22px;
+            background: rgba(46,197,255,0.3);
+        }
+        .nav-logos img {
+            height: 28px;
+            width: auto;
+            object-fit: contain;
+            filter: brightness(0) invert(1);
+            opacity: 0.85;
+            transition: opacity .2s;
+        }
+        .nav-logos img:hover { opacity: 1; }
 
         /* ---------- HERO ---------- */
         .hero {
@@ -244,9 +264,19 @@
                 <span class="brand-dot"></span>
                 <span class="display-font" style="font-size:1.05rem;">Field Service · IA</span>
             </a>
-            <button type="button" class="btn btn-sky px-3 py-2" onclick="document.getElementById('registro-form').scrollIntoView();">
-                Reservar mi lugar
-            </button>
+
+            <!-- logos partner + ctech -->
+            <div class="nav-logos ms-3">
+                <img src="img/logopartner.png" alt="Salesforce Partner">
+                <div class="nav-sep"></div>
+                <img src="img/logoctech.png" alt="Cambalache Technologies">
+            </div>
+
+            <div class="ms-auto">
+                <button type="button" class="btn btn-sky px-3 py-2" onclick="document.getElementById('registro-form').scrollIntoView();">
+                    Reservar mi lugar
+                </button>
+            </div>
         </div>
     </nav>
 
@@ -267,7 +297,7 @@
                     </div>
                 </div>
 
-                <!-- FORM (Web-to-Lead intacto) -->
+                <!-- FORM -->
                 <div class="col-lg-5">
                     <div class="form-card p-4" id="registro-form">
                         <p class="tag mb-1">Inscripción</p>
@@ -444,13 +474,10 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // --- Conteo regresivo: 7 de julio de 2026, 12:00 hs Argentina (UTC-3) ---
         const eventDate = new Date("2026-07-07T12:00:00-03:00").getTime();
-
         const tick = setInterval(function () {
             const now = Date.now();
             const d = eventDate - now;
-
             if (d < 0) {
                 clearInterval(tick);
                 document.getElementById("countdown").innerHTML = '<span class="display-font fw-semibold" style="color:var(--sky);">¡El evento está en vivo!</span>';
@@ -460,7 +487,6 @@
             const hours = Math.floor((d % 86400000) / 3600000);
             const minutes = Math.floor((d % 3600000) / 60000);
             const seconds = Math.floor((d % 60000) / 1000);
-
             const p = n => n < 10 ? '0' + n : n;
             document.getElementById("days").textContent = p(days);
             document.getElementById("hours").textContent = p(hours);
@@ -468,7 +494,6 @@
             document.getElementById("seconds").textContent = p(seconds);
         }, 1000);
 
-        // --- Validación nativa Bootstrap ---
         document.addEventListener('DOMContentLoaded', function () {
             const form = document.getElementById('salesforceForm');
             form.addEventListener('submit', function (event) {
