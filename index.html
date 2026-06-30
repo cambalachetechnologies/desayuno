@@ -1,6 +1,5 @@
 <!doctype html>
 <html lang="es">
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,7 +7,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-
     <style>
         :root {
             --ink: #0a1628;
@@ -20,21 +18,17 @@
             --paper: #f4f7fb;
             --line: rgba(46, 197, 255, 0.18);
         }
-
         * { scroll-behavior: smooth; }
-
         body {
             font-family: 'Inter', sans-serif;
             background-color: var(--paper);
             color: #1b2733;
             overflow-x: hidden;
         }
-
         h1, h2, h3, h4, .display-font {
             font-family: 'Sora', sans-serif;
             letter-spacing: -0.02em;
         }
-
         /* ---------- NAV ---------- */
         .nav-bar {
             background: rgba(10, 22, 40, 0.85);
@@ -80,7 +74,6 @@
             transition: opacity .2s;
         }
         .nav-logos img:hover { opacity: 1; }
-
         /* ---------- HERO ---------- */
         .hero {
             position: relative;
@@ -136,7 +129,6 @@
             font-weight: 500;
             background: rgba(46,197,255,0.06);
         }
-
         /* ---------- FORM CARD ---------- */
         .form-card {
             background: #ffffff;
@@ -163,7 +155,6 @@
             padding: .8rem; border-radius: 10px; transition: all .25s ease;
         }
         .btn-submit:hover { filter: brightness(1.08); transform: translateY(-1px); box-shadow: 0 10px 28px rgba(0,154,217,.4); color:#fff;}
-
         /* ---------- COUNTDOWN STRIP ---------- */
         .strip {
             background: var(--ink);
@@ -180,7 +171,6 @@
         }
         .cd-label { font-size:.72rem; letter-spacing:.16em; text-transform:uppercase; color: var(--sky); }
         .cd-sep { color: var(--line); font-size: 1.8rem; }
-
         /* ---------- SESSION CONTENT ---------- */
         .section-label {
             font-family:'Sora',sans-serif; font-weight:600; font-size:.78rem;
@@ -218,7 +208,6 @@
         .sess-card h4 { font-weight:700; font-size:1.18rem; margin-bottom:.6rem; color: var(--ink); }
         .sess-card .q { color: var(--sky-deep); font-weight:600; font-size:.92rem; margin-bottom:.7rem; }
         .sess-card p { color:#516170; font-size:.96rem; margin:0; }
-
         /* ---------- DETAILS ---------- */
         .meta-card{
             background: var(--ink-2); color:#fff; border-radius:16px; padding:1.6rem 1.8rem;
@@ -230,7 +219,6 @@
         .aud-pill svg{ width:17px; height:17px; color: var(--sky-deep); }
         .meta-card .lbl{ font-size:.72rem; letter-spacing:.16em; text-transform:uppercase; color: var(--sky); }
         .meta-card .val{ font-family:'Sora',sans-serif; font-weight:600; font-size:1.15rem; }
-
         /* ---------- CTA ---------- */
         .cta-band{
             background:
@@ -238,7 +226,6 @@
               linear-gradient(120deg, var(--ink), var(--steel));
             color:#fff; border-radius: 22px;
         }
-
         /* ---------- AUDIENCE PILLS ---------- */
         .aud-pill{
             background:#fff; border:1px solid #e6edf5; border-radius:999px;
@@ -246,17 +233,13 @@
             display:inline-flex; align-items:center; gap:8px;
         }
         .aud-pill i{ color: var(--sky-deep); }
-
         footer{ background: var(--ink); color:#7e93a8; }
-
         @media (prefers-reduced-motion: reduce){
             *{ transition:none !important; }
         }
     </style>
 </head>
-
 <body>
-
     <!-- NAV -->
     <nav class="navbar navbar-expand-lg nav-bar sticky-top py-3">
         <div class="container">
@@ -264,14 +247,12 @@
                 <span class="brand-dot"></span>
                 <span class="display-font" style="font-size:1.05rem;">Field Service · IA</span>
             </a>
-
             <!-- logos partner + ctech -->
             <div class="nav-logos ms-3">
                 <img src="img/logopartner.png" alt="Salesforce Partner">
                 <div class="nav-sep"></div>
                 <img src="img/logoctech.png" alt="Cambalache Technologies">
             </div>
-
             <div class="ms-auto">
                 <button type="button" class="btn btn-sky px-3 py-2" onclick="document.getElementById('registro-form').scrollIntoView();">
                     Reservar mi lugar
@@ -279,14 +260,13 @@
             </div>
         </div>
     </nav>
-
     <!-- HERO -->
     <header class="hero">
         <div class="grid-overlay"></div>
         <div class="container py-5 position-relative">
             <div class="row align-items-center gy-5">
                 <div class="col-lg-7 pe-lg-5">
-                    <span class="eyebrow mb-4 d-inline-flex">Evento online en vivo · 7 de julio</span>
+                    <span class="eyebrow mb-4 d-inline-flex">Evento online en vivo · 8 de julio</span>
                     <h1 class="mb-3">Field Service en acción con Agentforce</h1>
                     <p class="lead-sub mb-4">Inteligencia Artificial aplicada a la gestión de activos, operaciones y servicio de campo</p>
                     <p class="body mb-4">Una recorrida práctica por las capacidades de IA que están redefiniendo el trabajo de los equipos de campo. No es una presentación de slides: es ver la herramienta funcionando sobre los problemas reales del sector.</p>
@@ -296,7 +276,6 @@
                         <span class="chip">Planificación de capacidad</span>
                     </div>
                 </div>
-
                 <!-- FORM -->
                 <div class="col-lg-5">
                     <div class="form-card p-4" id="registro-form">
@@ -306,11 +285,9 @@
                         <form id="salesforceForm"
                               action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00D5w000003XOQ6"
                               method="POST">
-
                             <input type="hidden" name="oid" value="00D5w000003XOQ6">
                             <input type="hidden" name="retURL" value="https://cambalachetechnologies.github.io/desayuno/subpaginas/gracias.html">
                             <input type="hidden" name="lead_source" value="Evento Field Service IA Oil and Gas">
-
                             <div class="row g-2">
                                 <div class="col-md-6">
                                     <input name="first_name" type="text" class="form-control" placeholder="Nombre" required>
@@ -328,7 +305,6 @@
                                     <input name="mobile" type="tel" class="form-control" placeholder="Teléfono móvil" required title="Ingrese su número de teléfono móvil" />
                                 </div>
                             </div>
-
                             <div class="d-grid mt-3">
                                 <button type="submit" name="submit" class="btn btn-submit">CONFIRMAR MI LUGAR</button>
                             </div>
@@ -339,14 +315,13 @@
             </div>
         </div>
     </header>
-
     <!-- COUNTDOWN STRIP -->
     <section class="strip py-4">
         <div class="container">
             <div class="row align-items-center text-center text-md-start gy-3">
                 <div class="col-md-4">
                     <span class="cd-label d-block mb-1">El evento comienza en</span>
-                    <span class="display-font fw-semibold" style="color:#fff;">Martes 7 de julio · 12:00 hs (ARG)</span>
+                    <span class="display-font fw-semibold" style="color:#fff;">Miércoles 8 de julio · 12:00 hs (ARG)</span>
                 </div>
                 <div class="col-md-8">
                     <div class="d-flex justify-content-center justify-content-md-end align-items-center gap-3" id="countdown">
@@ -362,7 +337,6 @@
             </div>
         </div>
     </section>
-
     <!-- SESSION CONTENT -->
     <section class="py-5" id="contenido">
         <div class="container py-4">
@@ -371,7 +345,6 @@
                 <h2 class="fw-bold mt-2" style="font-size:clamp(1.8rem,4vw,2.6rem); color:var(--ink);">Qué vas a ver funcionando</h2>
                 <p class="text-muted mx-auto mt-2" style="max-width:620px;">Tres formas concretas en que la IA de Agentforce Field Service le saca trabajo de encima a los equipos de campo y a quienes los planifican.</p>
             </div>
-
             <div class="row g-4">
                 <div class="col-lg-4">
                     <div class="sess-card">
@@ -385,7 +358,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="col-lg-4">
                     <div class="sess-card">
                         <img class="sess-thumb" src="img/content-3.jpg" alt="Técnico inspeccionando equipo en campo con planilla">
@@ -398,7 +370,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="col-lg-4">
                     <div class="sess-card">
                         <img class="sess-thumb" src="img/content-2.jpg" alt="Activos de infraestructura energética">
@@ -414,7 +385,6 @@
             </div>
         </div>
     </section>
-
     <!-- DETAILS -->
     <section class="pb-5" id="detalles">
         <div class="container">
@@ -423,7 +393,7 @@
                     <div class="meta-card">
                         <svg class="meta-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
                         <p class="lbl mt-3 mb-1">Fecha</p>
-                        <p class="val mb-0">Martes 7 de julio, 2026</p>
+                        <p class="val mb-0">Miércoles 8 de julio, 2026</p>
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -443,7 +413,6 @@
             </div>
         </div>
     </section>
-
     <!-- AUDIENCE + CTA -->
     <section class="pb-5">
         <div class="container">
@@ -465,16 +434,14 @@
             </div>
         </div>
     </section>
-
     <footer class="py-4">
         <div class="container text-center">
             <p class="mb-0 small">© 2026 Field Service en acción con Agentforce · Soluciones de IA para la industria de Oil &amp; Gas.</p>
         </div>
     </footer>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        const eventDate = new Date("2026-07-07T12:00:00-03:00").getTime();
+        const eventDate = new Date("2026-07-08T12:00:00-03:00").getTime();
         const tick = setInterval(function () {
             const now = Date.now();
             const d = eventDate - now;
@@ -493,7 +460,6 @@
             document.getElementById("minutes").textContent = p(minutes);
             document.getElementById("seconds").textContent = p(seconds);
         }, 1000);
-
         document.addEventListener('DOMContentLoaded', function () {
             const form = document.getElementById('salesforceForm');
             form.addEventListener('submit', function (event) {
@@ -506,5 +472,4 @@
         });
     </script>
 </body>
-
 </html>
